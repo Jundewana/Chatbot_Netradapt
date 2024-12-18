@@ -1,2 +1,2 @@
-QuizBot - Netradapt
+**QuizBot - Netradapt**
 Welcome to QuizBot, a chatbot built for Netradapt, a startup focused on providing educational solutions for visually impaired students. This bot is designed to assist users by providing information about Netradapt, its products, and inclusive education for students with visual impairments. The chatbot integrates Google’s Gemini Generative AI and is accessible via both web and mobile applications.
