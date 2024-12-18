@@ -1,0 +1,16 @@
+{
+  "name": "netradapt-chatbot",
+  "version": "1.0.0",
+  "description": "A chatbot for Netradapt and QuizSense.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.21.2",
+    "genkit": "^1.0.3"
+  }
+}
