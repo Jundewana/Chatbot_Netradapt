@@ -1,0 +1,97 @@
+node_modules/
+package-lock.json
+
+
+.env
+config/quizbotnetradapt-firebase-adminsdk-7j5xm-9fcc54eba7.json
+
+# Firebase Service Account Key
+config/fourth-walker-444010-t5-5e0d63c2aa55.json
+
+# Log Files
+*.log
+
+# VS Code
+.vscode/
+
+# Build Artifacts
+build/
+dist/
+
+# Flutter
+**/Flutter/ephemeral/
+**/Pods/
+**/xcuserdata/
+**/DerivedData/
+**/.generated/
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.pub/
+
+# Android
+**/android/.gradle/
+**/android/captures/
+**/android/local.properties
+**/android/key.properties
+**/android/*.keystore
+**/android/*.jks
+
+# iOS
+**/ios/Flutter/.last_build_id
+**/ios/.generated/
+**/ios/Pods/
+**/ios/DerivedData/
+**/ios/.symlinks/
+**/ios/profile
+**/ios/xcuserdata/
+
+# macOS
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/xcuserdata/
+
+# Windows
+**/windows/flutter/ephemeral/
+**/windows/x64/
+**/windows/x86/
+**/windows/*.suo
+**/windows/*.user
+**/windows/*.userosscache
+**/windows/*.sln.docstates
+
+# Linux
+**/linux/flutter/ephemeral/
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+generative.js
