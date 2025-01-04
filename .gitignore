@@ -94,4 +94,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-generative.js
+
+"config/quizbotnetradapt-firebase-adminsdk-7j5xm-9fcc54eba7.json" 
