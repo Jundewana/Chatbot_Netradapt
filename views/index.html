@@ -1,8 +1,9 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QuizBot - Netradapt</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -23,24 +24,28 @@
       overflow-y: auto;
       background-color: #fff;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
     }
     .chat-message {
       margin: 10px 0;
       padding: 10px;
       border-radius: 5px;
+      max-width: 80%;
+      word-wrap: break-word;
     }
     .user-message {
-      color: #fff;
-      background-color: #007bff;
       align-self: flex-end;
+      background-color: #007bff;
+      color: #fff;
     }
     .bot-message {
-      color: #fff;
-      background-color: #28a745;
       align-self: flex-start;
+      background-color: #28a745;
+      color: #fff;
     }
     #user-input {
-      width: calc(100% - 100px);
+      width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -53,6 +58,8 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
     }
     #submit-btn:hover {
       background-color: #45a049;
@@ -61,6 +68,7 @@
       display: none;
       color: #888;
       margin-top: 10px;
+      text-align: center;
     }
     .chat-container {
       display: flex;
@@ -73,7 +81,7 @@
       width: 24px;
       height: 24px;
       animation: spin 1s linear infinite;
-      margin-top: 10px;
+      margin: 10px auto;
     }
     @keyframes spin {
       0% {
@@ -92,16 +100,15 @@
     <p class="text-center">Silakan ketik pertanyaan Anda di bawah untuk memulai percakapan.</p>
     
     <div id="chat-box" class="chat-container">
-      <!-- Chat will appear here -->
+      <!-- Chat akan muncul di sini -->
     </div>
 
     <div class="input-group mb-3">
-      <input type="text" id="user-input" class="form-control" placeholder="Tanyakan sesuatu...">
-      <div class="input-group-append">
-        <button id="submit-btn" class="btn btn-success">Kirim</button>
-      </div>
+      <input type="text" id="user-input" class="form-control" placeholder="Tanyakan sesuatu..." aria-label="Tanyakan sesuatu">
+      <!-- Mengubah tombol menjadi satuan dan menyesuaikan tampilannya -->
+      <button id="submit-btn" class="btn btn-success">Kirim</button>
     </div>
-    <div id="loading" class="spinner"></div>
+    <div id="loading" class="spinner" aria-label="Loading"></div>
   </div>
 
   <script>
@@ -110,45 +117,55 @@
     const chatBox = document.getElementById('chat-box');
     const loadingElement = document.getElementById('loading');
 
+    // Fungsi untuk menambahkan pesan ke chat box
+    function addMessage(content, className) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('chat-message', className);
+      messageElement.textContent = content;
+      chatBox.appendChild(messageElement);
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll ke bawah
+    }
+
     submitBtn.addEventListener('click', async () => {
       const userInput = userInputElement.value.trim();
 
       if (userInput) {
         userInputElement.value = ''; // Clear input field
-        loadingElement.style.display = 'block'; // Show loading indicator
+        loadingElement.style.display = 'block'; // Tampilkan loading spinner
 
-        // Add user message to chat box
-        const userMessageElement = document.createElement('div');
-        userMessageElement.classList.add('chat-message', 'user-message');
-        userMessageElement.textContent = `You: ${userInput}`;
-        chatBox.appendChild(userMessageElement);
-        chatBox.style.display = 'block'; // Show chat box
+        // Tambahkan pesan pengguna ke chat box
+        addMessage(`You: ${userInput}`, 'user-message');
 
         try {
-          // Send user input to backend API
+          // Kirim input pengguna ke backend API
           const response = await fetch('/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userInput })
           });
 
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
           const data = await response.json();
           const output = data.response || 'Error: No response from bot';
 
-          // Add bot response to chat box
-          const botMessageElement = document.createElement('div');
-          botMessageElement.classList.add('chat-message', 'bot-message');
-          botMessageElement.textContent = `QuizBot: ${output}`;
-          chatBox.appendChild(botMessageElement);
+          // Tambahkan respons bot ke chat box
+          addMessage(`QuizBot: ${output}`, 'bot-message');
         } catch (error) {
-          const errorMessageElement = document.createElement('div');
-          errorMessageElement.classList.add('chat-message', 'bot-message');
-          errorMessageElement.textContent = 'Error: Something went wrong!';
-          chatBox.appendChild(errorMessageElement);
+          console.error(error);
+          addMessage('Error: Something went wrong!', 'bot-message');
         } finally {
-          loadingElement.style.display = 'none'; // Hide loading indicator
-          chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat box
+          loadingElement.style.display = 'none'; // Sembunyikan loading spinner
         }
+      }
+    });
+
+    // Menangani pengiriman formulir dengan menekan Enter
+    userInputElement.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        submitBtn.click();
       }
     });
   </script>

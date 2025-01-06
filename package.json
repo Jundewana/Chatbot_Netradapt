@@ -7,13 +7,23 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "@genkit-ai/ai": "^0.9.12",
+    "@genkit-ai/core": "^0.9.12",
+    "@genkit-ai/dev-local-vectorstore": "^0.9.12",
+    "@genkit-ai/googleai": "^0.9.12",
     "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
     "cosine-similarity": "^1.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.21.2",
     "firebase-admin": "^13.0.2",
-    "genkit": "^1.0.0",
+    "genkit": "^0.9.12",
+    "genkitx-chromadb": "^0.9.12",
+    "llm-chunk": "^0.0.1",
     "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/pdf-parse": "^1.1.4"
   }
 }
